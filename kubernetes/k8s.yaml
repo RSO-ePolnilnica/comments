@@ -148,11 +148,11 @@ spec:
           name: comments-1
           resources:
             limits:
-              cpu: 500m
+              cpu: 100m
               ephemeral-storage: 1Gi
               memory: 2Gi
             requests:
-              cpu: 500m
+              cpu: 100m
               ephemeral-storage: 1Gi
               memory: 2Gi
           securityContext:
