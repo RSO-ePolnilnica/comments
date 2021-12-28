@@ -7,5 +7,5 @@ FROM openjdk:17
 RUN mkdir /app
 WORKDIR /app
 COPY --from=build ./app/api/target/comments-api-0.0.1-SNAPSHOT.jar /app
-EXPOSE 8080
+EXPOSE 8082
 CMD ["java", "-jar", "comments-api-0.0.1-SNAPSHOT.jar"]
