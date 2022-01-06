@@ -1,11 +1,12 @@
 package si.fri.rso.comments.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import si.fri.rso.comments.models.entities.Comment;
 import si.fri.rso.comments.models.repositories.CommentRepository;
+
+import java.util.concurrent.CompletableFuture;
 
 @Component
 public class CommentService {
@@ -18,9 +19,15 @@ public class CommentService {
         return commentRepository.save(s);
     }
 
-    public Iterable<Comment> getAllComments(){
-        return commentRepository.findAll();
+    @Async
+    public CompletableFuture<Iterable<Comment>> getAllComments(){
+        Iterable<Comment> c = commentRepository.findAll();
+        return CompletableFuture.completedFuture(c);
     }
 
-    public Iterable<Comment> getAllCommentsForStation(Integer id) { return commentRepository.findAllByStationID(id); }
+    @Async
+    public CompletableFuture<Iterable<Comment>> getAllCommentsForStation(Integer id) {
+        Iterable<Comment> c = commentRepository.findAllByStationID(id);
+        return CompletableFuture.completedFuture(c);
+    }
 }

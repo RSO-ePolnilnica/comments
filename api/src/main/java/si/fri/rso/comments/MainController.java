@@ -47,13 +47,12 @@ public class MainController {
     @GetMapping(path="/comments/all")
     public @ResponseBody Iterable<Comment> getAllComments() {
         // This returns a JSON or XML with the users
-        return commentService.getAllComments();
+        return commentService.getAllComments().join();
     }
 
     @GetMapping("/comments/{id}")
     public @ResponseBody Iterable<Comment> getStationComments(@PathVariable("id") Integer id)
     {
-        System.out.println(id);
-        return commentService.getAllCommentsForStation(id);
+        return commentService.getAllCommentsForStation(id).join();
     }
 }
