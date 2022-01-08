@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import si.fri.rso.comments.models.entities.Comment;
 import si.fri.rso.comments.models.entities.CommentTemp;
@@ -25,11 +24,10 @@ public class MainController {
     @Autowired
     private CommentService commentService;
 
-    @Autowired
-    private ServiceHealthIndicator serviceHealthIndicator;
-
     @GetMapping("/")
     public ResponseEntity healthCheck(){
+        if(isSick)
+            return ResponseEntity.internalServerError().build();
         return ResponseEntity.ok().build();
     }
 
@@ -63,7 +61,7 @@ public class MainController {
 
     @PostMapping("/comments/sicktime")
     public ResponseEntity makeMeSick(){
-        serviceHealthIndicator.makeMeSick();
+        isSick = true;
         return ResponseEntity.ok().build();
     }
 }
