@@ -20,8 +20,13 @@ public class MainController {
     @Value("${allowCommenting:true}")
     private boolean canComment;
 
+    private boolean isSick = false;
+
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private ServiceHealthIndicator serviceHealthIndicator;
 
     @GetMapping("/")
     public ResponseEntity healthCheck(){
@@ -54,5 +59,11 @@ public class MainController {
     public @ResponseBody Iterable<Comment> getStationComments(@PathVariable("id") Integer id)
     {
         return commentService.getAllCommentsForStation(id).join();
+    }
+
+    @PostMapping("/comments/sicktime")
+    public ResponseEntity makeMeSick(){
+        serviceHealthIndicator.makeMeSick();
+        return ResponseEntity.ok().build();
     }
 }
