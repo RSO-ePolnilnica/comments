@@ -13,7 +13,7 @@ import si.fri.rso.comments.services.CommentService;
 @RestController // This means that this class is a Controller
 //@RequestMapping(path="/comments") // This means URL's start with /demo (after Application path)
 @RefreshScope
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://frontend-t4vmtoqorq-ew.a.run.app")
 public class MainController {
 
     @Value("${allowCommenting:true}")
